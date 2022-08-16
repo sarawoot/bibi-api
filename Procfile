@@ -1,0 +1,1 @@
+web: SERVER_ADDR=:$PORT bin/server

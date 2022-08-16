@@ -1,0 +1,27 @@
+
+version: "3.8"
+
+services:
+  db:
+    image: postgres:13-alpine
+    container_name: postgres
+    hostname: postgres
+    restart: always
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    environment:
+      TZ: Asia/Bangkok
+      POSTGRES_DB: bibi
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: P@ssw0rd
+      POSTGRES_INITDB_ARGS: --locale=th_TH.UTF-8
+      LANG: th_TH.UTF-8
+    ports:
+      - 5432:5432
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - 8080:8080
