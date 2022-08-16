@@ -1,8 +1,4 @@
-CREATE SCHEMA bibi;
-
 SET search_path to bibi ;
-
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE bibi.skin_types (
     id uuid DEFAULT uuid_generate_v4(),
@@ -89,7 +85,6 @@ CREATE TABLE bibi.banners (
     CONSTRAINT banners_pkey PRIMARY KEY (id),
     CONSTRAINT banners_area_code_unique UNIQUE (area_code)
 );
-
 
 CREATE TABLE bibi.banner_images (
     id uuid DEFAULT uuid_generate_v4(),
