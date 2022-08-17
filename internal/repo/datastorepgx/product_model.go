@@ -33,7 +33,7 @@ type ProductScan struct {
 	ShortDescription  pgtype.Text      `db:"short_description"`
 	Description       pgtype.Text      `db:"description"`
 	Size              pgtype.Varchar   `db:"size"`
-	Price             pgtype.Float8    `db:"price"`
+	Price             float64          `db:"price"`
 	ProductTypeID     pgtype.UUID      `db:"product_type_id"`
 	ProductCategoryID pgtype.UUID      `db:"product_category_id"`
 	SkinTypeID        pgtype.UUID      `db:"skin_type_id"`
@@ -60,7 +60,7 @@ func (p *ProductScan) toModel() *model.Product {
 		ShortDescription: &p.ShortDescription.String,
 		Description:      &p.ShortDescription.String,
 		Size:             &p.Size.String,
-		Price:            &p.Price.Float,
+		Price:            &p.Price,
 		Tags:             textArrayToSlice(p.Tags),
 		ProductTypeID:    (*uuid.UUID)(p.ProductTypeID.Bytes[:]),
 	}
