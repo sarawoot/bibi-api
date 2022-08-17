@@ -22,7 +22,7 @@ type BannerImage struct {
 	CreatedTime pgtype.Time `db:"created_time"`
 }
 
-func (b *Banner) toModel() model.Banner {
+func (b Banner) toModel() model.Banner {
 	rs := model.Banner{
 		ID:       b.ID.Bytes,
 		Name:     b.Name,
@@ -37,7 +37,7 @@ func (b *Banner) toModel() model.Banner {
 	return rs
 }
 
-func (b *BannerImage) toModel() model.BannerImage {
+func (b BannerImage) toModel() model.BannerImage {
 	return model.BannerImage{
 		ID:       b.ID.Bytes,
 		BannerID: b.BannerID.Bytes,

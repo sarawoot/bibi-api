@@ -13,7 +13,7 @@ type ProductRecommend struct {
 	CreatedTime pgtype.Time `db:"created_time"`
 }
 
-func (p *ProductRecommend) toModel() model.ProductRecommend {
+func (p ProductRecommend) toModel() model.ProductRecommend {
 	return model.ProductRecommend{
 		ID:        p.ID.Bytes,
 		ProductID: p.ProductID.Bytes,

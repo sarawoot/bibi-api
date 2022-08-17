@@ -13,7 +13,7 @@ type Admin struct {
 	CreatedTime  pgtype.Time `db:"created_time"`
 }
 
-func (a *Admin) toModel() model.Admin {
+func (a Admin) toModel() model.Admin {
 	return model.Admin{
 		ID:           a.ID.Bytes,
 		Username:     a.Username,

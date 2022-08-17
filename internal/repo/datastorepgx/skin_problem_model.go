@@ -11,7 +11,7 @@ type SkinProblem struct {
 	Name string      `db:"name"`
 }
 
-func (s *SkinProblem) toModel() model.SkinProblem {
+func (s SkinProblem) toModel() model.SkinProblem {
 	return model.SkinProblem{
 		ID:   s.ID.Bytes,
 		Name: s.Name,

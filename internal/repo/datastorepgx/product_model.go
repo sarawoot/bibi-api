@@ -73,7 +73,7 @@ func (p ProductScan) toModel() model.Product {
 	return rs
 }
 
-func (p *ProductImage) toModel() model.ProductImage {
+func (p ProductImage) toModel() model.ProductImage {
 	return model.ProductImage{
 		ID:        p.ID.Bytes,
 		ProductID: p.ProductID.Bytes,

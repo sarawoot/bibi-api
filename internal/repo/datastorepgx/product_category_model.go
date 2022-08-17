@@ -11,7 +11,7 @@ type ProductCategory struct {
 	Name string      `db:"name"`
 }
 
-func (s *ProductCategory) toModel() model.ProductCategory {
+func (s ProductCategory) toModel() model.ProductCategory {
 	return model.ProductCategory{
 		ID:   s.ID.Bytes,
 		Name: s.Name,
