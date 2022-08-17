@@ -52,7 +52,7 @@ type ProductImage struct {
 	CreatedTime pgtype.Time    `db:"created_time"`
 }
 
-func (p *ProductScan) toModel() model.Product {
+func (p ProductScan) toModel() model.Product {
 	rs := model.Product{
 		ID:               p.ID.Bytes,
 		Brand:            &p.Brand.String,
