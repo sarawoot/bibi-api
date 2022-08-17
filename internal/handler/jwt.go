@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"api/internal/model"
 	"errors"
 	"time"
 
@@ -8,7 +9,7 @@ import (
 	"github.com/lestrrat-go/jwx/v2/jwt"
 )
 
-func (h *Handler) signJWT(userID uuid.UUID) (string, error) {
+func (h *Handler) signJWT(userID uuid.UUID, authProvider model.AuthProvider) (string, error) {
 	token := jwt.New()
 	currentTime := time.Now()
 	tokenSetMap := map[string]interface{}{
@@ -17,6 +18,7 @@ func (h *Handler) signJWT(userID uuid.UUID) (string, error) {
 		jwt.AudienceKey:   []string{jwtAud},
 		jwt.ExpirationKey: currentTime.Add(jwtExpirationTime),
 		jwt.IssuedAtKey:   currentTime,
+		"auth_provider":   authProvider,
 	}
 
 	for k, v := range tokenSetMap {

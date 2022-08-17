@@ -1,6 +1,8 @@
 package model
 
-import "github.com/google/uuid"
+import (
+	"github.com/google/uuid"
+)
 
 type Product struct {
 	ID                uuid.UUID      `json:"id"`
@@ -9,7 +11,7 @@ type Product struct {
 	ShortDescription  *string        `json:"short_description"`
 	Description       *string        `json:"description"`
 	Size              *string        `json:"size"`
-	Price             *float64       `json:"price"`
+	Price             *Decimal       `json:"price"`
 	ProductTypeID     *uuid.UUID     `json:"product_type_id"`
 	ProductCategoryID *uuid.UUID     `json:"product_category_id"`
 	SkinTypeID        *uuid.UUID     `json:"skin_type_id"`

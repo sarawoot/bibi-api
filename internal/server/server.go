@@ -3,7 +3,6 @@ package server
 import (
 	"context"
 	"fmt"
-	"os"
 
 	"net/http"
 	"os/signal"
@@ -12,9 +11,10 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/jackc/pgx/v4/log/logrusadapter"
+	"github.com/jackc/pgtype"
+	shopspring "github.com/jackc/pgtype/ext/shopspring-numeric"
+	"github.com/jackc/pgx/v4"
 	"github.com/jackc/pgx/v4/pgxpool"
-	"github.com/sirupsen/logrus"
 
 	"api/internal/config"
 	"api/internal/handler"
@@ -198,16 +198,26 @@ func initPgx(postgresConnection string) (*pgxpool.Pool, error) {
 		return nil, err
 	}
 
-	looger := &logrus.Logger{
-		Out:          os.Stderr,
-		Formatter:    new(logrus.JSONFormatter),
-		Hooks:        make(logrus.LevelHooks),
-		Level:        logrus.InfoLevel,
-		ExitFunc:     os.Exit,
-		ReportCaller: false,
-	}
+	// looger := &logrus.Logger{
+	// 	Out:          os.Stderr,
+	// 	Formatter:    new(logrus.JSONFormatter),
+	// 	Hooks:        make(logrus.LevelHooks),
+	// 	Level:        logrus.InfoLevel,
+	// 	ExitFunc:     os.Exit,
+	// 	ReportCaller: false,
+	// }
 
-	conf.ConnConfig.Logger = logrusadapter.NewLogger(looger)
+	// conf.ConnConfig.Logger = logrusadapter.NewLogger(looger)
+
+	conf.AfterConnect = func(ctx context.Context, c *pgx.Conn) error {
+		c.ConnInfo().RegisterDataType(pgtype.DataType{
+			Value: &shopspring.Numeric{},
+			Name:  "numeric",
+			OID:   pgtype.NumericOID,
+		})
+
+		return nil
+	}
 
 	return pgxpool.ConnectConfig(context.Background(), conf)
 }

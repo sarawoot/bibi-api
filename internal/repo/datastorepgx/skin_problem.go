@@ -20,7 +20,7 @@ func (r *DataStoreRepo) ListSkinProblem(ctx context.Context) ([]model.SkinProble
 
 	SkinProblems := make([]model.SkinProblem, 0, len(SkinProblemRows))
 	for _, row := range SkinProblemRows {
-		SkinProblems = append(SkinProblems, *row.toModel())
+		SkinProblems = append(SkinProblems, row.toModel())
 	}
 
 	return SkinProblems, nil

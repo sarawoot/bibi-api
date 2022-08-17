@@ -197,7 +197,7 @@ func (r *DataStoreRepo) AdminListProduct(ctx context.Context, limit, offset int)
 
 	products := make([]model.Product, 0, len(productRows))
 	for _, row := range productRows {
-		products = append(products, *row.toModel())
+		products = append(products, row.toModel())
 	}
 
 	return products, nil
@@ -243,8 +243,9 @@ func (r *DataStoreRepo) GetProductByID(ctx context.Context, id uuid.UUID) (*mode
 		return nil, err
 	}
 	productRow.Images = images
+	product := productRow.toModel()
 
-	return productRow.toModel(), nil
+	return &product, nil
 }
 
 func (r *DataStoreRepo) ListProductNewArrival(ctx context.Context, limit int) ([]model.Product, error) {
@@ -272,7 +273,7 @@ func (r *DataStoreRepo) ListProductNewArrival(ctx context.Context, limit int) ([
 		}
 		row.Images = images
 
-		products = append(products, *row.toModel())
+		products = append(products, row.toModel())
 	}
 
 	return products, nil

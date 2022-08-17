@@ -11,8 +11,8 @@ type SkinType struct {
 	Name string      `db:"name"`
 }
 
-func (s *SkinType) toModel() *model.SkinType {
-	return &model.SkinType{
+func (s *SkinType) toModel() model.SkinType {
+	return model.SkinType{
 		ID:   s.ID.Bytes,
 		Name: s.Name,
 	}

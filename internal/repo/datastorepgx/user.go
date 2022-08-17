@@ -37,10 +37,11 @@ func (r *DataStoreRepo) GetUserByEmail(ctx context.Context, email string) (*mode
 		return nil, err
 	}
 
-	var user User
-	if err := pgxscan.ScanOne(&user, row); err != nil {
+	var userRow User
+	if err := pgxscan.ScanOne(&userRow, row); err != nil {
 		return nil, err
 	}
+	user := userRow.toModel()
 
-	return user.toModel(), nil
+	return &user, nil
 }

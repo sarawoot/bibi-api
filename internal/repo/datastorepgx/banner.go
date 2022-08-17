@@ -163,11 +163,11 @@ func (r *DataStoreRepo) ListBanner(ctx context.Context) ([]model.Banner, error) 
 		if err != nil {
 			return nil, err
 		}
-		banner := *row.toModel()
+		banner := row.toModel()
 
 		banner.Images = make([]model.BannerImage, 0, len(images))
 		for _, image := range images {
-			banner.Images = append(banner.Images, *image.toModel())
+			banner.Images = append(banner.Images, image.toModel())
 		}
 
 		banners = append(banners, banner)
@@ -197,8 +197,9 @@ func (r *DataStoreRepo) GetBannerByID(ctx context.Context, id uuid.UUID) (*model
 		return nil, err
 	}
 	bannerRow.Images = images
+	banner := bannerRow.toModel()
 
-	return bannerRow.toModel(), nil
+	return &banner, nil
 }
 
 func (r *DataStoreRepo) GetBannerByAreaCode(ctx context.Context, areaCode string) (*model.Banner, error) {
@@ -217,8 +218,9 @@ func (r *DataStoreRepo) GetBannerByAreaCode(ctx context.Context, areaCode string
 		return nil, err
 	}
 	bannerRow.Images = images
+	banner := bannerRow.toModel()
 
-	return bannerRow.toModel(), nil
+	return &banner, nil
 }
 
 func (r *DataStoreRepo) listBannerImageByBannerID(ctx context.Context, id uuid.UUID) ([]BannerImage, error) {

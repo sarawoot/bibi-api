@@ -24,7 +24,7 @@ func (r *DataStoreRepo) ListProductCategory(ctx context.Context) ([]model.Produc
 
 	productCategories := make([]model.ProductCategory, 0, len(productCategoryRows))
 	for _, row := range productCategoryRows {
-		productCategories = append(productCategories, *row.toModel())
+		productCategories = append(productCategories, row.toModel())
 	}
 
 	return productCategories, nil
@@ -45,8 +45,9 @@ func (r *DataStoreRepo) GetProductCategoryByID(ctx context.Context, id uuid.UUID
 	if err := pgxscan.ScanOne(&productCategoryRow, row); err != nil {
 		return nil, err
 	}
+	productCategory := productCategoryRow.toModel()
 
-	return productCategoryRow.toModel(), nil
+	return &productCategory, nil
 }
 
 func (r *DataStoreRepo) CreateProductCategory(ctx context.Context, productCategory *model.ProductCategory) error {

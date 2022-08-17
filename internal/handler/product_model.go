@@ -19,7 +19,7 @@ type ProductResponse struct {
 	ShortDescription  string                 `json:"short_description"`
 	Description       string                 `json:"description"`
 	Size              string                 `json:"size"`
-	Price             float64                `json:"price"`
+	Price             model.Decimal          `json:"price"`
 	ProductTypeID     model.UUID             `json:"product_type_id,omitempty"`
 	ProductCategoryID model.UUID             `json:"product_category_id,omitempty"`
 	SkinTypeID        model.UUID             `json:"skin_type_id,omitempty"`
@@ -38,7 +38,7 @@ type AdminCreateProductRequest struct {
 	ShortDescription  *string                 `form:"short_description"`
 	Description       *string                 `form:"description"`
 	Size              *string                 `form:"size"`
-	Price             *float64                `form:"price"`
+	Price             *model.Decimal          `form:"price"`
 	ProductTypeID     *string                 `form:"product_type_id"  binding:"omitempty,uuid"`
 	ProductCategoryID *string                 `form:"product_category_id" binding:"omitempty,uuid"`
 	SkinTypeID        *string                 `form:"skin_type_id" binding:"omitempty,uuid"`
@@ -61,17 +61,17 @@ type AdminListProductRequest struct {
 }
 
 type AdminUpdateProductRequest struct {
-	Brand             *string  `json:"brand"`
-	Name              *string  `json:"name"`
-	ShortDescription  *string  `json:"short_description"`
-	Description       *string  `json:"description"`
-	Size              *string  `json:"size"`
-	Price             *float64 `json:"price"`
-	ProductTypeID     *string  `json:"product_type_id"  binding:"omitempty,uuid"`
-	ProductCategoryID *string  `json:"product_category_id" binding:"omitempty,uuid"`
-	SkinTypeID        *string  `json:"skin_type_id" binding:"omitempty,uuid"`
-	CountryID         *string  `json:"country_id" binding:"omitempty,uuid"`
-	Tags              []string `json:"tags"`
+	Brand             *string        `json:"brand"`
+	Name              *string        `json:"name"`
+	ShortDescription  *string        `json:"short_description"`
+	Description       *string        `json:"description"`
+	Size              *string        `json:"size"`
+	Price             *model.Decimal `json:"price"`
+	ProductTypeID     *string        `json:"product_type_id"  binding:"omitempty,uuid"`
+	ProductCategoryID *string        `json:"product_category_id" binding:"omitempty,uuid"`
+	SkinTypeID        *string        `json:"skin_type_id" binding:"omitempty,uuid"`
+	CountryID         *string        `json:"country_id" binding:"omitempty,uuid"`
+	Tags              []string       `json:"tags"`
 }
 
 type MobileProductNewArrivalRequest struct {

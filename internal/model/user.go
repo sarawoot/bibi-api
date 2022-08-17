@@ -6,6 +6,14 @@ import (
 	"github.com/google/uuid"
 )
 
+type AuthProvider string
+
+var (
+	UserPasswordAuth AuthProvider = "password"
+	FacebookAuth     AuthProvider = "facebook"
+	GmailAuth        AuthProvider = "gmail"
+)
+
 type User struct {
 	ID            uuid.UUID
 	Email         string    `json:"email"`

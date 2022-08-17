@@ -46,7 +46,7 @@ func (r *DataStoreRepo) AdminListProductRecommend(ctx context.Context, limit, of
 
 	productRecommends := make([]model.ProductRecommend, 0, len(productRecommendRows))
 	for _, row := range productRecommendRows {
-		productRecommends = append(productRecommends, *row.toModel())
+		productRecommends = append(productRecommends, row.toModel())
 	}
 
 	return productRecommends, nil
@@ -149,7 +149,7 @@ func (r *DataStoreRepo) MobileListProductRecommend(ctx context.Context, limit in
 		}
 		row.Product.Images = images
 
-		productRecommends = append(productRecommends, *row.toModel())
+		productRecommends = append(productRecommends, row.toModel())
 	}
 
 	return productRecommends, nil

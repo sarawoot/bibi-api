@@ -18,8 +18,8 @@ type User struct {
 	CreatedTime   pgtype.Time `db:"created_time"`
 }
 
-func (u *User) toModel() *model.User {
-	return &model.User{
+func (u *User) toModel() model.User {
+	return model.User{
 		ID:            u.ID.Bytes,
 		Email:         u.Email,
 		PasswordHash:  u.PasswordHash,

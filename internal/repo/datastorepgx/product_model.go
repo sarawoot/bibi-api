@@ -14,7 +14,7 @@ type Product struct {
 	ShortDescription  *string           `db:"short_description"`
 	Description       *string           `db:"description"`
 	Size              *string           `db:"size"`
-	Price             *float64          `db:"price"`
+	Price             *model.Decimal    `db:"price"`
 	ProductTypeID     *pgtype.UUID      `db:"product_type_id"`
 	ProductCategoryID *pgtype.UUID      `db:"product_category_id"`
 	SkinTypeID        *pgtype.UUID      `db:"skin_type_id"`
@@ -33,7 +33,7 @@ type ProductScan struct {
 	ShortDescription  pgtype.Text      `db:"short_description"`
 	Description       pgtype.Text      `db:"description"`
 	Size              pgtype.Varchar   `db:"size"`
-	Price             float64          `db:"price"`
+	Price             model.Decimal    `db:"price"`
 	ProductTypeID     pgtype.UUID      `db:"product_type_id"`
 	ProductCategoryID pgtype.UUID      `db:"product_category_id"`
 	SkinTypeID        pgtype.UUID      `db:"skin_type_id"`
@@ -52,7 +52,7 @@ type ProductImage struct {
 	CreatedTime pgtype.Time    `db:"created_time"`
 }
 
-func (p *ProductScan) toModel() *model.Product {
+func (p *ProductScan) toModel() model.Product {
 	rs := model.Product{
 		ID:               p.ID.Bytes,
 		Brand:            &p.Brand.String,
@@ -67,14 +67,14 @@ func (p *ProductScan) toModel() *model.Product {
 
 	rs.Images = make([]model.ProductImage, 0, len(p.Images))
 	for _, image := range p.Images {
-		rs.Images = append(rs.Images, *image.toModel())
+		rs.Images = append(rs.Images, image.toModel())
 	}
 
-	return &rs
+	return rs
 }
 
-func (p *ProductImage) toModel() *model.ProductImage {
-	return &model.ProductImage{
+func (p *ProductImage) toModel() model.ProductImage {
+	return model.ProductImage{
 		ID:        p.ID.Bytes,
 		ProductID: p.ProductID.Bytes,
 		Path:      p.Path.String,

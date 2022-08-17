@@ -31,10 +31,10 @@ CREATE TABLE bibi.users (
     CONSTRAINT users_pkey PRIMARY KEY (id),
     CONSTRAINT users_email_unique UNIQUE (email),
     CONSTRAINT users_skin_type_id_fkey FOREIGN KEY (skin_type_id)
-        REFERENCES skin_types (id) MATCH FULL
+        REFERENCES bibi.skin_types (id) MATCH FULL
         ON UPDATE CASCADE,
     CONSTRAINT users_skin_problem_id_fkey FOREIGN KEY (skin_problem_id)
-        REFERENCES skin_problems (id) MATCH FULL
+        REFERENCES bibi.skin_problems (id) MATCH FULL
         ON UPDATE CASCADE
 );
 
@@ -94,7 +94,7 @@ CREATE TABLE bibi.banner_images (
 
     CONSTRAINT banner_images_pkey PRIMARY KEY (id),
     CONSTRAINT banner_images_banner_id_fkey FOREIGN KEY (banner_id)
-        REFERENCES banners (id) MATCH FULL
+        REFERENCES bibi.banners (id) MATCH FULL
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
@@ -117,16 +117,16 @@ CREATE TABLE bibi.products (
 
     CONSTRAINT products_pkey PRIMARY KEY (id),
     CONSTRAINT products_product_type_id_fkey FOREIGN KEY (product_type_id)
-        REFERENCES product_types (id) MATCH FULL
+        REFERENCES bibi.product_types (id) MATCH FULL
         ON UPDATE CASCADE,
     CONSTRAINT products_product_category_id_fkey FOREIGN KEY (product_category_id)
-        REFERENCES product_categories (id) MATCH FULL
+        REFERENCES bibi.product_categories (id) MATCH FULL
         ON UPDATE CASCADE,
     CONSTRAINT products_skin_type_id_fkey FOREIGN KEY (skin_type_id)
-        REFERENCES skin_types (id) MATCH FULL
+        REFERENCES bibi.skin_types (id) MATCH FULL
         ON UPDATE CASCADE,
     CONSTRAINT products_country_id_fkey FOREIGN KEY (country_id)
-        REFERENCES countries (id) MATCH FULL
+        REFERENCES bibi.countries (id) MATCH FULL
         ON UPDATE CASCADE
 );
 
@@ -138,7 +138,7 @@ CREATE TABLE bibi.product_images (
 
     CONSTRAINT product_images_pkey PRIMARY KEY (id),
     CONSTRAINT product_images_product_id_fkey FOREIGN KEY (product_id)
-        REFERENCES products (id) MATCH FULL
+        REFERENCES bibi.products (id) MATCH FULL
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
@@ -150,7 +150,7 @@ CREATE TABLE bibi.product_recommends (
 
     CONSTRAINT product_recommends_pkey PRIMARY KEY (id),
     CONSTRAINT product_recommends_product_id_fkey FOREIGN KEY (product_id)
-        REFERENCES products (id) MATCH FULL
+        REFERENCES bibi.products (id) MATCH FULL
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );

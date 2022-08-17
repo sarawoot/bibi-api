@@ -19,6 +19,7 @@ require (
 	github.com/jessevdk/go-flags v1.5.0
 	github.com/lestrrat-go/jwx/v2 v2.0.3
 	github.com/lithammer/shortuuid/v4 v4.0.0
+	github.com/shopspring/decimal v1.2.0
 	github.com/sirupsen/logrus v1.8.1
 	golang.org/x/crypto v0.0.0-20220622213112-05595931fe9d
 )

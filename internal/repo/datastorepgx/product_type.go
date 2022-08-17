@@ -24,7 +24,7 @@ func (r *DataStoreRepo) ListProductType(ctx context.Context) ([]model.ProductTyp
 
 	productTypes := make([]model.ProductType, 0, len(productTypeRows))
 	for _, row := range productTypeRows {
-		productTypes = append(productTypes, *row.toModel())
+		productTypes = append(productTypes, row.toModel())
 	}
 
 	return productTypes, nil
@@ -45,8 +45,9 @@ func (r *DataStoreRepo) GetProductTypeByID(ctx context.Context, id uuid.UUID) (*
 	if err := pgxscan.ScanOne(&productTypeRow, row); err != nil {
 		return nil, err
 	}
+	productType := productTypeRow.toModel()
 
-	return productTypeRow.toModel(), nil
+	return &productType, nil
 }
 
 func (r *DataStoreRepo) CreateProductType(ctx context.Context, productType *model.ProductType) error {

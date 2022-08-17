@@ -46,7 +46,7 @@ func (h *Handler) AdminCreateProduct(c *gin.Context) {
 		})
 	}
 
-	if err := h.datastoreRepo.CreateProduct(ctx, product); err != nil {
+	if err := h.datastoreRepo.CreateProduct(ctx, &product); err != nil {
 		log.Error(err)
 
 		c.JSON(http.StatusInternalServerError, RenderJSON(err))
@@ -186,7 +186,7 @@ func (h *Handler) AdminUpdateProduct(c *gin.Context) {
 
 	ctx := c.Request.Context()
 	product := req.toModel()
-	if err := h.datastoreRepo.UpdateProduct(ctx, id, product); err != nil {
+	if err := h.datastoreRepo.UpdateProduct(ctx, id, &product); err != nil {
 		log.Error(err)
 		c.JSON(http.StatusInternalServerError, RenderJSON(err))
 		return

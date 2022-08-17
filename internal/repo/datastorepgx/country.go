@@ -24,7 +24,7 @@ func (r *DataStoreRepo) ListCountry(ctx context.Context) ([]model.Country, error
 
 	countries := make([]model.Country, 0, len(countryRows))
 	for _, row := range countryRows {
-		countries = append(countries, *row.toModel())
+		countries = append(countries, row.toModel())
 	}
 
 	return countries, nil
@@ -45,8 +45,9 @@ func (r *DataStoreRepo) GetCountryByID(ctx context.Context, id uuid.UUID) (*mode
 	if err := pgxscan.ScanOne(&countryRow, row); err != nil {
 		return nil, err
 	}
+	country := countryRow.toModel()
 
-	return countryRow.toModel(), nil
+	return &country, nil
 }
 
 func (r *DataStoreRepo) CreateCountry(ctx context.Context, country *model.Country) error {

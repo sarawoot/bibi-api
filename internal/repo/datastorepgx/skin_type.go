@@ -20,7 +20,7 @@ func (r *DataStoreRepo) ListSkinType(ctx context.Context) ([]model.SkinType, err
 
 	skinTypes := make([]model.SkinType, 0, len(skinTypeRows))
 	for _, row := range skinTypeRows {
-		skinTypes = append(skinTypes, *row.toModel())
+		skinTypes = append(skinTypes, row.toModel())
 	}
 
 	return skinTypes, nil

@@ -56,7 +56,7 @@ func (h *Handler) UserSignup(c *gin.Context) {
 		return
 	}
 
-	token, err := h.signJWT(user.ID)
+	token, err := h.signJWT(user.ID, model.UserPasswordAuth)
 	if err != nil {
 		log.Error(err)
 		c.JSON(http.StatusInternalServerError, RenderJSON(err))
@@ -99,7 +99,7 @@ func (h *Handler) UserLogin(c *gin.Context) {
 		return
 	}
 
-	token, err := h.signJWT(user.ID)
+	token, err := h.signJWT(user.ID, model.UserPasswordAuth)
 	if err != nil {
 		log.Error(err)
 		c.JSON(http.StatusInternalServerError, RenderJSON(err))

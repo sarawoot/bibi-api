@@ -13,10 +13,11 @@ func (r *DataStoreRepo) GetAdminByUsername(ctx context.Context, username string)
 		return nil, err
 	}
 
-	var admin Admin
-	if err := pgxscan.ScanOne(&admin, row); err != nil {
+	var adminRow Admin
+	if err := pgxscan.ScanOne(&adminRow, row); err != nil {
 		return nil, err
 	}
+	admin := adminRow.toModel()
 
-	return admin.toModel(), nil
+	return &admin, nil
 }

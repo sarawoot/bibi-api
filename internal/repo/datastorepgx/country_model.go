@@ -13,8 +13,8 @@ type Country struct {
 	DeletedTime pgtype.Time `db:"deleted_time"`
 }
 
-func (s *Country) toModel() *model.Country {
-	return &model.Country{
+func (s *Country) toModel() model.Country {
+	return model.Country{
 		ID:   s.ID.Bytes,
 		Name: s.Name,
 	}

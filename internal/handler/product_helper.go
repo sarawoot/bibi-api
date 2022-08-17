@@ -55,8 +55,8 @@ func (h *Handler) modelProductToResponse(p model.Product) ProductResponse {
 	return resp
 }
 
-func (p *AdminCreateProductRequest) toModel() *model.Product {
-	return &model.Product{
+func (p *AdminCreateProductRequest) toModel() model.Product {
+	return model.Product{
 		ID:                uuid.New(),
 		Brand:             p.Brand,
 		Name:              p.Name,
@@ -72,8 +72,8 @@ func (p *AdminCreateProductRequest) toModel() *model.Product {
 	}
 }
 
-func (p *AdminUpdateProductRequest) toModel() *model.Product {
-	return &model.Product{
+func (p *AdminUpdateProductRequest) toModel() model.Product {
+	return model.Product{
 		Brand:             p.Brand,
 		Name:              p.Name,
 		ShortDescription:  p.ShortDescription,
