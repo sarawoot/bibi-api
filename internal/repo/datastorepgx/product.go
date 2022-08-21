@@ -197,6 +197,12 @@ func (r *DataStoreRepo) AdminListProduct(ctx context.Context, limit, offset int)
 
 	products := make([]model.Product, 0, len(productRows))
 	for _, row := range productRows {
+		images, err := r.listProductImageByProductID(ctx, row.ID.Bytes)
+		if err != nil {
+			return nil, err
+		}
+		row.Images = images
+
 		products = append(products, row.toModel())
 	}
 
