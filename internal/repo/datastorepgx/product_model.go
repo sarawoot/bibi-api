@@ -30,8 +30,8 @@ type ProductScan struct {
 	ID                pgtype.UUID      `db:"id"`
 	Brand             pgtype.Varchar   `db:"brand"`
 	Name              pgtype.Varchar   `db:"name"`
-	ShortDescription  pgtype.Text      `db:"short_description"`
-	Description       pgtype.Text      `db:"description"`
+	ShortDescription  pgtype.Text      `db:"omitempty,short_description"`
+	Description       pgtype.Text      `db:"omitempty,description"`
 	Size              pgtype.Varchar   `db:"size"`
 	Price             model.Decimal    `db:"price"`
 	ProductTypeID     pgtype.UUID      `db:"product_type_id"`
