@@ -19,7 +19,7 @@ type ProductResponse struct {
 	ShortDescription  string                 `json:"short_description"`
 	Description       string                 `json:"description"`
 	Size              string                 `json:"size"`
-	Price             model.Decimal          `json:"price"`
+	Price             *model.Decimal         `json:"price,omitempty"`
 	ProductTypeID     model.UUID             `json:"product_type_id,omitempty"`
 	ProductCategoryID model.UUID             `json:"product_category_id,omitempty"`
 	SkinTypeID        model.UUID             `json:"skin_type_id,omitempty"`

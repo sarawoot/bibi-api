@@ -5,6 +5,7 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/jackc/pgtype"
+	shopspring "github.com/jackc/pgtype/ext/shopspring-numeric"
 )
 
 type Product struct {
@@ -27,20 +28,20 @@ type Product struct {
 }
 
 type ProductScan struct {
-	ID                pgtype.UUID      `db:"id"`
-	Brand             pgtype.Varchar   `db:"brand"`
-	Name              pgtype.Varchar   `db:"name"`
-	ShortDescription  pgtype.Text      `db:"short_description"`
-	Description       pgtype.Text      `db:"description"`
-	Size              pgtype.Varchar   `db:"size"`
-	Price             model.Decimal    `db:"price"`
-	ProductTypeID     pgtype.UUID      `db:"product_type_id"`
-	ProductCategoryID pgtype.UUID      `db:"product_category_id"`
-	SkinTypeID        pgtype.UUID      `db:"skin_type_id"`
-	CountryID         pgtype.UUID      `db:"country_id"`
-	Tags              pgtype.TextArray `db:"tags"`
-	CreatedTime       pgtype.Time      `db:"created_time"`
-	DeletedTime       pgtype.Time      `db:"deleted_time"`
+	ID                pgtype.UUID        `db:"id"`
+	Brand             pgtype.Varchar     `db:"brand"`
+	Name              pgtype.Varchar     `db:"name"`
+	ShortDescription  pgtype.Text        `db:"short_description"`
+	Description       pgtype.Text        `db:"description"`
+	Size              pgtype.Varchar     `db:"size"`
+	Price             shopspring.Numeric `db:"price"`
+	ProductTypeID     pgtype.UUID        `db:"product_type_id"`
+	ProductCategoryID pgtype.UUID        `db:"product_category_id"`
+	SkinTypeID        pgtype.UUID        `db:"skin_type_id"`
+	CountryID         pgtype.UUID        `db:"country_id"`
+	Tags              pgtype.TextArray   `db:"tags"`
+	CreatedTime       pgtype.Time        `db:"created_time"`
+	DeletedTime       pgtype.Time        `db:"deleted_time"`
 
 	Images []ProductImage `db:"-"`
 }
@@ -60,9 +61,12 @@ func (p ProductScan) toModel() model.Product {
 		ShortDescription: &p.ShortDescription.String,
 		Description:      &p.ShortDescription.String,
 		Size:             &p.Size.String,
-		Price:            &p.Price,
 		Tags:             textArrayToSlice(p.Tags),
 		ProductTypeID:    (*uuid.UUID)(p.ProductTypeID.Bytes[:]),
+	}
+
+	if p.Price.Status == pgtype.Present {
+		rs.Price = &model.Decimal{Decimal: p.Price.Decimal}
 	}
 
 	rs.Images = make([]model.ProductImage, 0, len(p.Images))

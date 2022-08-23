@@ -22,7 +22,7 @@ func (h *Handler) modelProductToResponse(p model.Product) ProductResponse {
 		ShortDescription:  *p.ShortDescription,
 		Description:       *p.Description,
 		Size:              *p.Size,
-		Price:             *p.Price,
+		Price:             p.Price,
 		Tags:              p.Tags,
 		ProductTypeID:     model.UUID(uuid.Nil),
 		ProductCategoryID: model.UUID(uuid.Nil),
