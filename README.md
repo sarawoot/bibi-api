@@ -8,5 +8,6 @@ products                ผลิตภัณฑ์
 product_types           ชนิดของผลิตภัณฑ์
 product_categories      ประเภทของผลิตภัณฑ์
 countries               ประเทศ
-product                 ผลิตภัณฑ์
+products                ผลิตภัณฑ์
+product_recommends      ผลิตภัณฑ์ที่แนะนำ
 ```
