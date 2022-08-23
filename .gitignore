@@ -1,3 +1,5 @@
 *.DS_Store
 pgdata
 .vscode
+vendor
+deploy

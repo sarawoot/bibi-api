@@ -154,3 +154,37 @@ CREATE TABLE bibi.product_recommends (
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
+
+CREATE TABLE bibi.product_reviews (
+    id uuid DEFAULT uuid_generate_v4(),
+    user_id uuid DEFAULT NULL,
+    product_id uuid DEFAULT NULL,
+    comment text,
+    rating int DEFAULT NULL,
+    created_time timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT product_reviews_pkey PRIMARY KEY (id),
+    CONSTRAINT product_reviews_product_id_fkey FOREIGN KEY (product_id)
+        REFERENCES bibi.products (id) MATCH FULL
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT product_reviews_user_id_fkey FOREIGN KEY (user_id)
+        REFERENCES bibi.users (id) MATCH FULL
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+
+CREATE TABLE bibi.product_ratings (
+    id uuid DEFAULT uuid_generate_v4(),
+    product_id uuid DEFAULT NULL,
+    rating int,
+    amount int DEFAULT 0,
+    created_time timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT product_ratings_pkey PRIMARY KEY (id),
+    CONSTRAINT product_ratings_product_id_fkey FOREIGN KEY (product_id)
+        REFERENCES bibi.products (id) MATCH FULL
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
