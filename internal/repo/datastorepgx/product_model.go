@@ -59,7 +59,7 @@ func (p ProductScan) toModel() model.Product {
 		Brand:            &p.Brand.String,
 		Name:             &p.Name.String,
 		ShortDescription: &p.ShortDescription.String,
-		Description:      &p.ShortDescription.String,
+		Description:      &p.Description.String,
 		Size:             &p.Size.String,
 		Tags:             textArrayToSlice(p.Tags),
 		ProductTypeID:    (*uuid.UUID)(p.ProductTypeID.Bytes[:]),
